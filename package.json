@@ -1,0 +1,30 @@
+{
+  "name": "socket-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc && cp -R ./src/client ./dist",
+    "start": "npm run build && node ./dist/server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malsabbagh/socket-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malsabbagh/socket-demo/issues"
+  },
+  "homepage": "https://github.com/malsabbagh/socket-demo#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "express": "^4.17.3",
+    "path": "^0.12.7",
+    "ws": "^8.5.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.3",
+    "typescript": "^4.6.3"
+  }
+}

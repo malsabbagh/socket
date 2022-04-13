@@ -1,0 +1,37 @@
+<body>
+  <h1>
+    Web Socket
+  </h1>
+  <p>
+    open console to see connection.
+  </p>
+  <script>
+  var socket = new WebSocket("wss://demo.dummy-server.com/socket");
+
+  socket.addEventListener("open", () => {
+    // send a message to the server
+    socket.send(JSON.stringify({
+      type: "message from client",
+      content: [ "socket request" ]
+    }));
+  });
+
+  window.addEventListener("beforeunload", () => {
+    socket.send(JSON.stringify({
+      type: "close socket",
+      content: [ "socket closed" ]
+    }));
+  });
+
+  // receive a message from the server
+  socket.addEventListener("message", ({ data }) => {
+    const packet = JSON.parse(data);
+
+    switch (packet.type) {
+      case "message from server":
+        console.log(packet.content);
+        break;
+    }
+  });
+  </script>
+</body>
