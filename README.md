@@ -5,7 +5,7 @@
 `npm run start`
 
 ## Certificate 
-Execute the following command to generate a new certificate for `dummy-server.com`
+Execute the following command to generate a new certificate on mac for `dummy-server.com`
 ```
 openssl req \
 -newkey rsa:2048 \

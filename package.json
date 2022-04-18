@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc && cp -R ./src/client ./dist",
-    "start": "npm run build && node ./dist/server/index.js"
+    "start": "npm run build && node ./dist/server/index.js",
+    "build:win": "@powershell Remove-Item ./dist -Recurse && tsc && @powershell Copy-Item ./src/client ./dist -Recurse",
+    "start:win": "npm run build:win && node ./dist/server/index.js"
   },
   "repository": {
     "type": "git",

@@ -37,6 +37,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.resolve('./dist/client/index.html'));
 })
 
+app.get('/embedWebex.html', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/embedWebex.html'));
+})
+
+
 app.listen(3000, function () {
   console.log('App listening port 3000!')
 })

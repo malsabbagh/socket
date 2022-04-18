@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Demo sockets for a bug</title>
+    <script src="https://binaries.webex.com/static-content-pipeline/webex-embedded-app/v1/webex-embedded-app-sdk.js" defer></script>
+  </head>
+<body>
+  <h1>
+    Webex
+  </h1>
+  <p>
+    Webex Embedder
+  </p>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var app = new Webex.Application();
+        app.onReady().then(async () => {
+            var url = "https://demo.dummy-server.com/";
+            console.log(`onReady called setting share Url ${url}`);
+            app.on('application:shareStateChanged', (event) => { 
+                if (event) {
+                    window.location.href = url;
+                } else {
+                    window.location.href = `${url}/embedWebex.html`;
+                }
+            });
+            await app.setShareUrl(url, url, "Socket Demo");
+        });
+    });
+    </script>
+</body>
+</html>
