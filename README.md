@@ -35,5 +35,5 @@ openssl req \
 - Always generate a new certificate for new development. 
 - Make sure to add the generated certificate as a trusted certificate.
 - Make sure you add `dummy-server.conf` to your `nginx.conf` and reference the proper trusted certificate
-- Make sure to add `127.0.0.1   demo.dummy-server.conf` to your /etc/hosts file
+- Make sure to add `127.0.0.1   demo.dummy-server.com` to your /etc/hosts file
 
