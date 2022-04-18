@@ -2,10 +2,12 @@
 ## Setup 
 `npm install`
 ## Running
-`npm run start`
+MacOS: `npm run start`
+
+Windows `npm run start:win`
 
 ## Certificate 
-Execute the following command to generate a new certificate on mac for `dummy-server.com`
+Execute the following command to generate a new certificate on MacOS (didn't get the chance to test this on Windows but it should be similar) for `dummy-server.com`
 ```
 openssl req \
 -newkey rsa:2048 \
