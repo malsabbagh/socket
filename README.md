@@ -6,6 +6,13 @@ MacOS: `npm run start`
 
 Windows `npm run start:win`
 
+## Testing with Embedded Webex
+- After running the project with nginx setup to use `https://demo.dummy-server.com` locally. 
+- Create a new Embedded app integration here https://developer.webex.com/my-apps/new
+- Use the following url as `Start page URL`: `https://demo.dummy-server.com/embedWebex.html`
+- Run the application in a `Meeting` space or `Messaging` space. 
+
+
 ## Certificate 
 Execute the following command to generate a new certificate on MacOS (didn't get the chance to test this on Windows but it should be similar) for `dummy-server.com`
 ```
@@ -29,3 +36,4 @@ openssl req \
 - Make sure to add the generated certificate as a trusted certificate.
 - Make sure you add `dummy-server.conf` to your `nginx.conf` and reference the proper trusted certificate
 - Make sure to add `127.0.0.1   demo.dummy-server.conf` to your /etc/hosts file
+
