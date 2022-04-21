@@ -2,10 +2,11 @@
   "name": "socket-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/server/index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc && cp -R ./src/client ./dist",
-    "start": "npm run build && node ./dist/server/index.js",
+    "start": "node ./dist/server/index.js", 
+    "dev": "npm run build && npm run start",
     "build:win": "@powershell Remove-Item ./dist -Recurse && tsc && @powershell Copy-Item ./src/client ./dist -Recurse",
     "start:win": "npm run build:win && node ./dist/server/index.js"
   },
