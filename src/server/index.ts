@@ -31,6 +31,10 @@ wsServer.on("connection", (socket) => {
     }));
   }
 
+  socket.on("close", () => {
+    console.log("socket connection closed")
+  })
+
   let connection = ++connections;
   // send a message to the client
   sendClientSocketMessage(socket, connection);
@@ -48,8 +52,11 @@ wsServer.on("connection", (socket) => {
         console.log(packet.content);
         --connections;
         sendClientSocketMessage(socket, connections);
-        socket.terminate();
-        socket.close();
+        console.log(`socket state ${socket.readyState}`);
+        if (socket.readyState == WebSocket.OPEN) {
+          socket.terminate();
+          socket.close();
+        }
         break;
     }
   });

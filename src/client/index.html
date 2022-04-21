@@ -15,6 +15,10 @@
   <script>
   var socket = new WebSocket("wss://socket-demo-webex.herokuapp.com/ws");
 
+  socket.onclose = (e) => {
+    console.log("socket connection closed");
+  };
+
   socket.addEventListener("open", () => {
     // send a message to the server
     socket.send(JSON.stringify({
@@ -28,7 +32,12 @@
       type: "close socket",
       content: [ "socket closed" ]
     }));
-    socket.close( );
+  });
+
+  window.addEventListener("unload", () => {
+    if(socket.readyState == WebSocket.OPEN) {
+        socket.close();
+    }
   });
 
   // receive a message from the server

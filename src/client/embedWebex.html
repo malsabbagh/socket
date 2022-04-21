@@ -17,7 +17,7 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         var app = new Webex.Application();
         app.onReady().then(async () => {
-            var url = "wss://socket-demo-webex.herokuapp.com";
+            var url = "https://socket-demo-webex.herokuapp.com";
             console.log(`onReady called setting share Url ${url}`);
             app.on('application:shareStateChanged', (event) => { 
                 if (event) {
