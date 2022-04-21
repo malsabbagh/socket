@@ -10,7 +10,10 @@ Windows `npm run start:win`
 - After running the project with nginx setup to use `https://demo.dummy-server.com` locally. 
 - Create a new Embedded app integration here https://developer.webex.com/my-apps/new
 - Use the following url as `Start page URL`: `https://demo.dummy-server.com/embedWebex.html`
+- Admin approve the application to be used inside the org.
 - Run the application in a `Meeting` space or `Messaging` space. 
+
+- To test the bug in `Messaging` space please use the following URL `https://demo.dummy-server.com`
 
 
 ## Certificate 
