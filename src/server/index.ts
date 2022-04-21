@@ -1,18 +1,39 @@
-import { WebSocketServer } from "ws";
+import { createServer } from "http";
+import { WebSocket } from "ws";
 import express from "express";
 import path from "path";
 
-const wsServer = new WebSocketServer({ port: 4514 });
+var app = express();
+
+app.get('/', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/index.html'));
+});
+
+app.get('/embedWebex.html', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/embedWebex.html'));
+});
+
+const server = createServer(app);
+
+server.listen(process.env.PORT, function () {
+  console.log(`App listening port ${process.env.PORT}!`);
+});
+
+const wsServer = new WebSocket.Server({ server: server, path: '/ws' });
 
 let connections: number = 0;
 
 wsServer.on("connection", (socket) => {
+  function sendClientSocketMessage(socket: WebSocket, connection: number) {
+    socket.send(JSON.stringify({
+      type: "message from server",
+      content: [`Current connections are ${connection} connection`]
+    }));
+  }
+
   let connection = ++connections;
   // send a message to the client
-  socket.send(JSON.stringify({
-    type: "message from server",
-    content: [ `Current connections are ${connection} connection`]
-  }));
+  sendClientSocketMessage(socket, connection);
 
   // receive a message from the client
   socket.on("message", (data) => {
@@ -26,22 +47,11 @@ wsServer.on("connection", (socket) => {
         console.log('disconnected');
         console.log(packet.content);
         --connections;
+        sendClientSocketMessage(socket, connections);
+        socket.terminate();
+        socket.close();
         break;
     }
   });
 });
 
-var app = express()
-
-app.get('/', function (req, res) {
-  res.sendFile(path.resolve('./dist/client/index.html'));
-})
-
-app.get('/embedWebex.html', function (req, res) {
-  res.sendFile(path.resolve('./dist/client/embedWebex.html'));
-})
-
-
-app.listen(3000, function () {
-  console.log('App listening port 3000!')
-})
