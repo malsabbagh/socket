@@ -6,17 +6,25 @@ import path from "path";
 var app = express();
 
 app.get('/', function (req, res) {
-  res.sendFile(path.resolve('./dist/client/index.html'));
+  res.sendFile(path.resolve('./dist/client/main/main.html'));
+});
+app.get('/main.js', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/main/main.js'));
 });
 
 app.get('/embedWebex.html', function (req, res) {
-  res.sendFile(path.resolve('./dist/client/embedWebex.html'));
+  res.sendFile(path.resolve('./dist/client/embed/embed.html'));
 });
+app.get('/embad.js', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/embed/embed.js'));
+});
+
+const port = process.env.PORT || 3000;
 
 const server = createServer(app);
 
-server.listen(process.env.PORT, function () {
-  console.log(`App listening port ${process.env.PORT}!`);
+server.listen(port, function () {
+  console.log(`App listening port ${port}!`);
 });
 
 const wsServer = new WebSocket.Server({ server: server, path: '/ws' });

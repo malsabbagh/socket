@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "ES6",
         "module": "commonjs",
         "esModuleInterop": true,
         "resolveJsonModule": true,
@@ -10,7 +10,8 @@
         "experimentalDecorators": true,
         "outDir": "dist",
         "rootDir": "./src",
+        "lib": ["es2016", "esnext", "dom"],
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "**/*.spec.ts"]
+    "exclude": ["node_modules", "**/*.spec.ts", "dist"]
   }
