@@ -2,9 +2,9 @@
 ## Setup 
 `npm install`
 ## Running
-MacOS: `npm run start`
+MacOS: `npm run dev`
 
-Windows `npm run start:win`
+Windows `npm run dev:win`
 
 ## Testing with Embedded Webex
 - After running the project with nginx setup to use `https://demo.dummy-server.com` locally. 

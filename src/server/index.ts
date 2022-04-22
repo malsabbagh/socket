@@ -1,18 +1,51 @@
-import { WebSocketServer } from "ws";
+import { createServer } from "http";
+import { WebSocket } from "ws";
 import express from "express";
 import path from "path";
 
-const wsServer = new WebSocketServer({ port: 4514 });
+var app = express();
+
+app.get('/', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/main/main.html'));
+});
+app.get('/main.js', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/main/main.js'));
+});
+
+app.get('/embedWebex.html', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/embed/embed.html'));
+});
+app.get('/embad.js', function (req, res) {
+  res.sendFile(path.resolve('./dist/client/embed/embed.js'));
+});
+
+const port = process.env.PORT || 3000;
+
+const server = createServer(app);
+
+server.listen(port, function () {
+  console.log(`App listening port ${port}!`);
+});
+
+const wsServer = new WebSocket.Server({ server: server, path: '/ws' });
 
 let connections: number = 0;
 
 wsServer.on("connection", (socket) => {
+  function sendClientSocketMessage(socket: WebSocket, connection: number) {
+    socket.send(JSON.stringify({
+      type: "message from server",
+      content: [`Current connections are ${connection} connection`]
+    }));
+  }
+
+  socket.on("close", () => {
+    console.log("socket connection closed")
+  })
+
   let connection = ++connections;
   // send a message to the client
-  socket.send(JSON.stringify({
-    type: "message from server",
-    content: [ `Current connections are ${connection} connection`]
-  }));
+  sendClientSocketMessage(socket, connection);
 
   // receive a message from the client
   socket.on("message", (data) => {
@@ -26,22 +59,14 @@ wsServer.on("connection", (socket) => {
         console.log('disconnected');
         console.log(packet.content);
         --connections;
+        sendClientSocketMessage(socket, connections);
+        console.log(`socket state ${socket.readyState}`);
+        if (socket.readyState == WebSocket.OPEN) {
+          socket.terminate();
+          socket.close();
+        }
         break;
     }
   });
 });
 
-var app = express()
-
-app.get('/', function (req, res) {
-  res.sendFile(path.resolve('./dist/client/index.html'));
-})
-
-app.get('/embedWebex.html', function (req, res) {
-  res.sendFile(path.resolve('./dist/client/embedWebex.html'));
-})
-
-
-app.listen(3000, function () {
-  console.log('App listening port 3000!')
-})

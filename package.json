@@ -7,15 +7,16 @@
     "build": "rm -rf ./dist && tsc && cp -R ./src/client ./dist",
     "start": "node ./dist/server/index.js", 
     "dev": "npm run build && npm run start",
-    "build:win": "@powershell Remove-Item ./dist -Recurse && tsc && @powershell Copy-Item ./src/client ./dist -Recurse",
-    "start:win": "npm run build:win && node ./dist/server/index.js"
+    "clean:win": "@powershell New-Item -ItemType Directory -Force -Path ./dist && @powershell Remove-Item ./dist -Recurse",
+    "build:win": "npm run clean:win && tsc && @powershell Copy-Item ./src/client ./dist -Exclude *.ts -Recurse -Force",
+    "dev:win": "npm run build:win && node ./dist/server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/malsabbagh/socket-demo.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/malsabbagh/socket-demo/issues"
   },
