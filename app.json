@@ -1,0 +1,12 @@
+{
+    "name": "Socket Webex Demo",
+    "description": "A barebones Node.js app using Express, sockets and webex embedded framework",
+    "repository": "https://github.com/malsabbagh/socket-demo",
+    "keywords": [
+        "node",
+        "express",
+        "static",
+        "webex",
+        "socket"
+    ]
+}
