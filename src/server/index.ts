@@ -15,7 +15,7 @@ app.get('/main.js', function (req, res) {
 app.get('/embedWebex.html', function (req, res) {
   res.sendFile(path.resolve('./dist/client/embed/embed.html'));
 });
-app.get('/embad.js', function (req, res) {
+app.get('/embed.js', function (req, res) {
   res.sendFile(path.resolve('./dist/client/embed/embed.js'));
 });
 
