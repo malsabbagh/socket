@@ -1,4 +1,7 @@
 # Socket Demo
+## Deploy
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/malsabbagh/socket-demo)
+
 ## Setup 
 `npm install`
 ## Running
